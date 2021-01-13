@@ -7,7 +7,7 @@ import sys
 ## python SNR.py videoname kernelsize output-filename
 print ('Argument List:', str(sys.argv))
 if(len(sys.argv)<4):
-  print("Error: 2 Arguments needed")
+  print("Error: 3 Arguments needed")
   print("this script should be called as following: python SNR.py videoname kernel-size output-filename")
   exit()
 
@@ -52,8 +52,9 @@ for image in images:
     img=cv2.imread(os.path.join(image_folder, image))
     #kernel
     n=int(kerne_size)
-    kernel=np.ones((n,n),np.float32)/(n**2)
-    img=cv2.filter2D(img,-1,kernel)
+    #kernel=np.ones((n,n),np.float32)/(n**2)
+    #img=cv2.filter2D(img,-1,kernel)
+    img=cv2.blur(img,(n,n))
     video.write(img)
 
 cv2.destroyAllWindows()
